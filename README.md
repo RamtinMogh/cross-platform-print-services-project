@@ -12,6 +12,8 @@ This project implements a cross-platform printing solution across a virtual lab 
 
 The solution uses **CUPS** for printer management and sharing over **HTTP/IPP**, and **WSL (Ubuntu)** to support Linux-based tooling from a Windows environment. A **Flask upload portal** was used to submit PDF print jobs into WSL/CUPS when direct printer discovery was not reliable.
 
+See [`docs/problem-statement.md`](docs/problem-statement.md) for the original requirements and constraints.
+
 ## Goals
 - Enable printing across mixed Windows + Linux systems
 - Maintain compatibility using open-source tools (CUPS/IPP)
