@@ -93,4 +93,4 @@ Upload PDF → Select printer → Submit (Flask handles submission to CUPS)
 - Troubleshooting: Check CUPS error log (/var/log/cups/error_log) if jobs fail
 - No Samba used — all sharing via HTTP/IPP
 
-See full original proposal PDF: [BigGuy Corp Multi-access Print Services Proposal](../docs/BigGuy-Corp-Print-Services-Proposal.pdf) (upload the PDF to docs/ folder if not already done)
+See full original proposal PDF: [BigGuy Corp Multi-access Print Services Proposal](../docs/BigGuy-Corp-Print-Services-Proposal.pdf)
