@@ -1,92 +1,70 @@
 # Cross-Platform Print Services (CUPS + WSL + Flask)
 
-**Two-way printing bridge for hybrid Windows/Linux environments** — Enables reliable print jobs between Windows 10 clients, Windows Server 2019, Debian CUPS servers, and Linux Mint clients using only open-source tools. Built as a Seneca College group project to eliminate Samba compatibility issues.
+**Two-way printing bridge for hybrid Windows/Linux environments** — Enables reliable bidirectional print jobs between Windows 10 clients, Windows Server 2019, Debian CUPS servers, and Linux Mint clients using only open-source tools. No Samba required.
 
 [![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-2.x-orange?logo=flask)](https://flask.palletsprojects.com/)
 [![CUPS](https://img.shields.io/badge/CUPS-2.x-green)](https://www.cups.org/)
 [![WSL](https://img.shields.io/badge/WSL-Ubuntu-blue?logo=linux)](https://learn.microsoft.com/en-us/windows/wsl/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## Overview
-This project delivers a cost-free, open-source cross-platform printing solution for a mixed-OS enterprise environment (BigGuy Corp simulation):
+Built for a simulated enterprise (BigGuy Corp) with mixed OSes:
+- Windows 10 client (Brasco) submits print jobs to Debian CUPS-PDF (ABC Server) and Windows Server 2019 (BigGuy)
+- Linux Mint client (ABC Client) prints natively to both targets
 
-- **Brasco** (Windows 10 client) submits print jobs to **ABC Server** (Debian CUPS-PDF) and **BigGuy** (Windows Server 2019)
-- **ABC Client** (Linux Mint) prints natively to both targets
-- Custom **Flask web portal** (running in WSL) allows Windows users to upload PDFs and submit to CUPS when native discovery fails
-- Printed PDFs automatically move from WSL filesystem to Windows host (e.g., Public Desktop)
+Key challenge solved: Native Windows discovery of CUPS printers inside WSL is unreliable → created a **Flask web portal** running in WSL for PDF uploads → submitted via `lp` to CUPS.
 
-Core workaround: Bridge Windows → CUPS limitations using WSL + HTTP/IPP sharing + Flask upload → `lp` submission.
+Printed PDFs auto-relocated from WSL filesystem to Windows host (e.g., Public Desktop) for easy access.
 
+All tools open-source and zero-cost: CUPS, WSL (Ubuntu), Flask, Bash.
 
 ## Goals
-- Enable bidirectional printing in hybrid Windows/Linux setups
-- Avoid proprietary tools or Samba dependencies
-- Use open-source components only (CUPS, IPP/HTTP, WSL, Flask, Bash)
-- Demonstrate practical troubleshooting in a virtualized lab
+- Enable reliable two-way printing in hybrid Windows/Linux setups
+- Eliminate Samba dependency and compatibility issues
+- Use only open-source components
+- Demonstrate practical systems administration and troubleshooting in a virtual lab
 
 ## Technologies Used
-- CUPS / CUPS-PDF (printer management & virtual PDF output)
-- WSL (Ubuntu on Windows host)
-- Flask (Python) – web upload portal
-- Bash scripting – post-print file relocation
+- CUPS / CUPS-PDF (printer server & virtual PDF printer)
+- WSL (Ubuntu on Windows Server 2019 host)
+- Flask (Python) – custom PDF upload web interface
+- Bash scripting – automated PDF file relocation
 - IPP/HTTP printing (CUPS shared over port 631)
-- VMware Workstation – multi-OS virtual lab
+- VMware Workstation – multi-VM lab environment (Windows 10, Windows Server 2019 + WSL, Debian 12, Linux Mint)
 
-## What I Built / Contributed
-- Configured CUPS on Debian (native) and WSL (Ubuntu) with HTTP sharing, security hardening (`cupsd.conf`, `cups-pdf.conf`)
-- Developed Flask upload interface to submit PDFs via `lp` command
-- Created Bash automation script to relocate printed PDFs from WSL to Windows filesystem
-- Documented complete setup, configs, and troubleshooting (DNS, auth, file trapping issues)
+## What I Implemented
+- Configured CUPS on native Debian 12 and inside WSL (Ubuntu) with HTTP/IPP sharing
+- Hardened CUPS configs (`cupsd.conf` for remote access, `cups-pdf.conf` for output path to Windows filesystem)
+- Built Flask web app (`flask-app/`) with file upload form → selects printer → submits via `lp` command
+- Wrote Bash post-processing script (`scripts/move_pdfs.sh`) to move printed PDFs from WSL to host Windows folder
+- Resolved real issues: WSL printer invisibility in Windows dialog, PDFs trapped in Linux filesystem, CUPS web UI limitations for uploads
+- Documented full setup, configs, and troubleshooting steps
 
 ## Setup Guide
-Detailed steps in [`docs/setup-guide.md`](./docs/setup-guide.md).
+See detailed instructions in [`docs/setup-guide.md`](./docs/setup-guide.md).
 
-Quick summary:
-1. Deploy VMs in VMware (Windows 10, Windows Server 2019 + WSL, Debian 12, Linux Mint)
-2. Install/configure CUPS + CUPS-PDF on servers; share printers over HTTP
-3. Run Flask app in WSL: `python app.py`
-4. Access upload portal[](http://<wsl-ip>:5000) from Windows to submit PDFs
+Quick high-level steps:
+1. Create VMs in VMware: Windows 10 (client), Windows Server 2019 (with WSL Ubuntu), Debian 12 (CUPS server), Linux Mint (client)
+2. Install CUPS + CUPS-PDF on Debian and WSL; configure sharing over HTTP
+3. Set up printer queues (e.g., DebianPDF, WindowsServerPDF)
+4. Deploy and run Flask app in WSL
+5. From Windows 10: access Flask portal → upload PDF → select printer → print
+6. Verify output PDFs appear on Windows filesystem
 
 ## Results
-- Achieved consistent two-way printing without Samba
-- Fully functional in VMware virtual lab environment
-- Zero-cost, scalable solution using open-source tools
-
-## Representative Illustrations
-Representative examples of key components (generic/public images matching the setup):
-
-- **CUPS Web Administration Interface** (printer management and sharing config)
-
-<grok-card data-id="09068b" data-type="image_card" data-plain-type="render_searched_image"  data-arg-size="LARGE" ></grok-card>
-
-
-
-<grok-card data-id="dda47a" data-type="image_card" data-plain-type="render_searched_image"  data-arg-size="LARGE" ></grok-card>
-
-
-- **Flask PDF Upload Portal** (custom web interface for Windows clients)
-
-<grok-card data-id="f619b2" data-type="image_card" data-plain-type="render_searched_image"  data-arg-size="LARGE" ></grok-card>
-
-
-- **Hybrid Virtualization Architecture** (VMware lab with Windows/Linux VMs)
-
-<grok-card data-id="5cb071" data-type="image_card" data-plain-type="render_searched_image"  data-arg-size="LARGE" ></grok-card>
-
-
-
-<grok-card data-id="f12fe4" data-type="image_card" data-plain-type="render_searched_image"  data-arg-size="LARGE" ></grok-card>
-
-
-(You can replace these later with your own recreated screenshots if you spin up the lab again — e.g., actual CUPS page, your Flask form, output folder.)
+- Consistent bidirectional printing achieved across all four OS combinations
+- No reliance on Samba or proprietary software
+- Fully functional in virtualized lab environment
+- Practical demonstration of hybrid systems integration, scripting, and workaround design
 
 ## Challenges & Resolutions
-- Samba/CUPS incompatibility → Switched to WSL + CUPS-PDF bridge
-- No native Windows discovery of CUPS printers → Built Flask portal workaround
-- PDFs trapped in WSL filesystem → cups-pdf.conf Out directive + Bash mover script
+- Samba/CUPS incompatibility in mixed environments → Used WSL + CUPS-PDF bridge
+- Windows cannot natively discover CUPS printers in WSL → Built custom Flask upload portal
+- Printed files trapped inside WSL → Modified `cups-pdf.conf` Out directive + Bash script to relocate to `/mnt/c/...`
 
 ## Repository Structure
-- `docs/` → Setup guide, problem statement, configs
-- `flask-app/` → Flask source (app.py, templates/)
-- `scripts/` → Bash automation (PDF handler)
+- `docs/`          → Problem statement, detailed setup guide, config excerpts
+- `flask-app/`     → Flask application source (app.py, templates/, static/ if any)
+- `scripts/`       → Bash automation scripts (e.g., PDF mover)
+
+This repo showcases my hands-on experience with Linux/Windows integration, CUPS administration, web scripting for IT workarounds, and virtualization troubleshooting.
