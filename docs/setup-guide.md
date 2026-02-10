@@ -61,7 +61,7 @@ sudo apt install python3-pip -y
 pip install flask
 mkdir flask-app && cd flask-app
 
-Create app.py (code is in flask-app/app.py in this repo)
+Create app.py — see the source code here: [app.py](../flask-app/app.py)
 
 Run:
 python3 app.py
