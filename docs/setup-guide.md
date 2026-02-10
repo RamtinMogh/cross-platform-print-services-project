@@ -73,7 +73,8 @@ Upload PDF, choose printer (DebianPDF or WindowsServerPDF), submit
 ## Step 5: Printing from Linux Mint
 On Linux Mint:
 - Settings > Printers > Add Printer
-- Use IPP: ipp://<server-ip>:631/printers/DebianPDF
+- Use IPP: ipp://<debian-ip>:631/printers/DebianPDF
+  
 
 ## Verification
 - From Windows: upload PDF via Flask → check CUPS queue + output folder
