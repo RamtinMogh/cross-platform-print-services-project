@@ -18,7 +18,6 @@ This project delivers a cost-free, open-source cross-platform printing solution 
 
 Core workaround: Bridge Windows → CUPS limitations using WSL + HTTP/IPP sharing + Flask upload → `lp` submission.
 
-Full project proposal (excerpts): [BigGuy Corp Multi-access Print Services Proposal](./docs/proposal_excerpts.md) or attach the PDF if you upload it.
 
 ## Goals
 - Enable bidirectional printing in hybrid Windows/Linux setups
@@ -91,6 +90,3 @@ Representative examples of key components (generic/public images matching the se
 - `docs/` → Setup guide, problem statement, configs
 - `flask-app/` → Flask source (app.py, templates/)
 - `scripts/` → Bash automation (PDF handler)
-- `diagrams/` → Architecture diagrams (add your own if possible)
-
-Feel free to fork/contribute!
