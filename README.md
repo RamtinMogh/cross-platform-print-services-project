@@ -68,3 +68,5 @@ Quick high-level steps:
 - `scripts/`       → Bash automation scripts (e.g., PDF mover)
 
 This repo showcases my hands-on experience with Linux/Windows integration, CUPS administration, web scripting for IT workarounds, and virtualization troubleshooting.
+
+For the complete project proposal (PDF): [BigGuy Corp Proposal](docs/BigGuy-Corp-Print-Services-Proposal.pdf)
