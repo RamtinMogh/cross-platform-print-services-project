@@ -53,9 +53,8 @@ Create the following script in WSL (Windows Server 2019):
 #!/bin/bash
 mv ~/PDF/* /mnt/c/Users/Public/Desktop/
 ```
-Make executable:
-chmod +x move_pdfs.sh
-Add this line to /etc/cups/cups-pdf.conf (on both servers):
-Out /mnt/c/Users/Public/Desktop/
-Create the folder on Windows if it does not exist:
-C:\Users\Public\Desktop\PrintedDocs
+- Make executable: chmod +x move_pdfs.sh
+- Add this line to /etc/cups/cups-pdf.conf (on both servers):
+  - Out /mnt/c/Users/Public/Desktop/
+- Create the folder on Windows if it does not exist:
+  - C:\Users\Public\Desktop\PrintedDocs
