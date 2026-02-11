@@ -56,8 +56,6 @@ mv ~/PDF/* /mnt/c/Users/Public/Desktop/
 - Make executable: chmod +x move_pdfs.sh
 - Add this line to /etc/cups/cups-pdf.conf (on both servers):
   - Out /mnt/c/Users/Public/Desktop/
-- Create the folder on Windows if it does not exist:
-  - C:\Users\Public\Desktop\PrintedDocs
 
 
 ## Step 6: Flask PDF Upload Portal (in WSL on Windows 10)
@@ -84,3 +82,17 @@ or ipp://<wsl-ip>:631/printers/WindowsServerPDF
 On Windows 10 (Brasco):
 Use browser to http://<wsl-ip>:5000
 Upload PDF → Select printer → Submit (Flask handles submission to CUPS)
+
+## Verification Steps
+- Upload PDF from Windows 10 via Flask portal → check CUPS job queue[](http://<server-ip>:631) 
+- Print test page from Linux Mint to both printers → confirm PDF appears
+- View all jobs and status at http://<server-ip>:631
+
+## Additional Notes
+- Firewall: Allow port 631 (CUPS) and 5000 (Flask)
+  Debian/WSL: sudo ufw allow 631
+  Windows firewall: allow inbound 631 and 5000
+- Troubleshooting: Check CUPS error log (/var/log/cups/error_log) if jobs fail
+- No Samba used — all sharing via HTTP/IPP
+
+See full original proposal: [BigGuy Corp Multi-access Print Services Proposal](../docs/BigGuy-Corp-Print-Services-Proposal.pdf)
