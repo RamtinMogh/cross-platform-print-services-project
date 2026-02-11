@@ -58,3 +58,29 @@ mv ~/PDF/* /mnt/c/Users/Public/Desktop/
   - Out /mnt/c/Users/Public/Desktop/
 - Create the folder on Windows if it does not exist:
   - C:\Users\Public\Desktop\PrintedDocs
+
+
+## Step 6: Flask PDF Upload Portal (in WSL on Windows 10)
+In WSL:
+sudo apt install python3-pip -y
+pip install flask
+mkdir flask-app && cd flask-app
+
+Create app.py — full source code: [flask-app/app.py](../flask-app/app.py)
+
+Run:
+python3 app.py
+
+Access from Windows 10 browser: http://<wsl-ip>:5000
+(Find WSL IP: ip addr show eth0 or hostname -I)
+
+## Step 7: Add Shared CUPS Printers on Clients
+On Linux Mint (ABC Client):
+Settings → Printers → Add Printer
+Network Printer → Internet Printing Protocol (IPP)
+URL example: ipp://<debian-ip>:631/printers/DebianPDF
+or ipp://<wsl-ip>:631/printers/WindowsServerPDF
+
+On Windows 10 (Brasco):
+Use browser to http://<wsl-ip>:5000
+Upload PDF → Select printer → Submit (Flask handles submission to CUPS)
