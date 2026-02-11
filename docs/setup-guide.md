@@ -43,7 +43,7 @@ sudo systemctl restart cups
 
 ## Step 4: Install WSL + Ubuntu
 On Windows Server 2019:
-wsl --install -d Ubuntu
+wsl --install -d Ubuntu-20.04
 
 Launch Ubuntu in WSL and repeat Steps 1–3 (install CUPS, configure cupsd.conf, add CUPS-PDF printer).
 
