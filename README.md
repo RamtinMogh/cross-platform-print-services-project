@@ -64,7 +64,7 @@ Quick high-level steps:
 
 ## Repository Structure
 - `docs/`          → Problem statement, detailed setup guide, config excerpts
-- `flask-app/`     → Flask application source (app.py, templates/, static/ if any)
+- `flask-app/`     → Flask application source (app.py, templates, and etc)
 - `scripts/`       → Bash automation scripts (e.g., PDF mover)
 
 This repo showcases my hands-on experience with Linux/Windows integration, CUPS administration, web scripting for IT workarounds, and virtualization troubleshooting.
