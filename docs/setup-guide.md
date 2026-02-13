@@ -11,9 +11,12 @@
 
 ## Step 1: Install CUPS and CUPS-PDF
 On Debian 12 and Linux Mint:
+
+```bash
 sudo apt update
 sudo apt install cups cups-pdf -y
 sudo systemctl enable --now cups
+```
 
 ## Step 2: Add CUPS-PDF Printer via Web Interface
 Open http://localhost:631 (or server IP:631)
@@ -29,10 +32,12 @@ Edit /etc/cups/cupsd.conf on both Debian and WSL:
 Listen 0.0.0.0:631
 Browsing On
 WebInterface Yes
+
 <Location />
   Order allow,deny
   Allow all
 </Location>
+
 <Location /admin>
   Order allow,deny
   Allow all
