@@ -61,7 +61,7 @@ mv ~/PDF/* /mnt/c/Users/Public/Desktop/
 - Make executable: chmod +x move_pdfs.sh
 - Add this line to /etc/cups/cups-pdf.conf (on both servers):
   - Out /mnt/c/Users/Public/Desktop/
-
+See the full script file: [move_pdfs.sh](../scripts/move_pdfs.sh)
 
 ## Step 6: Flask PDF Upload Portal (in WSL on Windows 10)
 In WSL:
